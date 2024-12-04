@@ -126,14 +126,14 @@ CREATE TABLE outcomes_demographics (
 );
 """
 
-# Execute the query to create the table
+# Check if the table exists
 try:
     with engine.connect() as conn:
-        conn.execute(text(create_table_query))
+        conn.execute("DROP TABLE IF EXISTS outcomes_demographics;")
+        conn.execute(create_table_query)
         print("Table 'outcomes_demographics' created or already exists.")
 except Exception as e:
     print(f"Error creating table: {e}")
-
 # Load the CSV data
 merged_data = pd.read_csv('merged_data.csv')
 
